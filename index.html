@@ -3,210 +3,1146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://fonts.googleapis.com;">
     <title>Cyber Ravana | Full Security Suite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --accent-primary: #00ff41;
-            --accent-muted: rgba(0, 255, 65, 0.1);
-            --bg-dark: #0d1117;
-            --bg-card: #161b22;
-            --border: #30363d;
-            --text-main: #e6edf3;
-            --sidebar-width: 260px;
-        }
-
-        body { 
-            font-family: 'Inter', system-ui, sans-serif; 
-            background-color: var(--bg-dark); 
-            color: var(--text-main); 
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #1a1a2e 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #00ff41;
+            text-align: center;
+            padding: 20px;
             margin: 0;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* --- Sidebar Navigation --- */
-        #sidebar {
-            width: var(--sidebar-width);
-            background: #010409;
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            padding: 20px 0;
-            overflow-y: auto;
-        }
-
-        .sidebar-header {
-            padding: 0 20px 20px;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 10px;
-        }
-
-        .sidebar-header h2 {
-            font-size: 1.2rem;
-            color: var(--accent-primary);
-            margin: 0;
-        }
-
-        .tab-button { 
-            background: transparent; 
-            color: #8b949e; 
-            border: none;
-            padding: 12px 20px;
-            text-align: left;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: 0.2s;
-            border-left: 3px solid transparent;
-        }
-
-        .tab-button:hover { 
-            background: var(--accent-muted); 
-            color: #fff;
-        }
-
-        .tab-button.active { 
-            color: var(--accent-primary);
-            background: var(--accent-muted);
-            border-left: 3px solid var(--accent-primary);
-        }
-
-        /* --- Main Content Area --- */
-        main {
-            flex-grow: 1;
-            padding: 40px;
-            overflow-y: auto;
-            background: radial-gradient(circle at top right, #161b22 0%, #0d1117 100%);
-        }
-
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .tool-box { 
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 30px;
-            max-width: 800px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        h3 { margin-top: 0; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-
-        /* --- Inputs & Buttons --- */
-        input, textarea { 
-            width: 100%;
-            background: #010409;
-            border: 1px solid var(--border);
-            color: #fff;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 6px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        button { 
-            background: var(--accent-primary);
-            color: #0d1117;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-right: 10px;
-            margin-top: 10px;
-        }
-
-        button:hover { opacity: 0.9; transform: translateY(-1px); }
-
-        .log-box { 
-            background: #000;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 20px;
-            border: 1px solid var(--border);
-            font-family: 'JetBrains Mono', monospace;
-            color: #8b949e;
+            overflow-x: hidden;
         }
         
-        .status-pass { color: var(--accent-primary); }
-        .status-fail { color: #ff4500; }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 3em;
+            text-shadow: 0 0 20px #00ff41, 0 0 40px #00ff41, 0 0 60px #00ff41;
+            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ff41, 0 0 40px #00ff41, 0 0 60px #00ff41; }
+            to { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41; }
+        }
+        
+        .tool-box {
+            border: 2px solid #00ff41;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 900px;
+            border-radius: 15px;
+            background: rgba(22, 27, 34, 0.9);
+            box-shadow: 0 0 30px rgba(0,255,65,0.3), inset 0 0 30px rgba(0,255,65,0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            transform: perspective(1000px) rotateX(0deg);
+        }
+        
+        .tool-box:hover {
+            transform: perspective(1000px) rotateX(5deg) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,255,65,0.4), inset 0 0 40px rgba(0,255,65,0.2);
+        }
+        
+        input, textarea, button {
+            margin: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #00ff41;
+            background: rgba(13, 17, 23, 0.8);
+            color: #00ff41;
+            width: 80%;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0,255,65,0.2);
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #00cc33;
+            box-shadow: 0 0 20px rgba(0,204,51,0.5);
+            transform: scale(1.02);
+        }
+        
+        button {
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            width: auto;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transform: perspective(1000px) rotateX(0deg);
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        button:hover::before {
+            left: 100%;
+        }
+        
+        button:hover {
+            transform: perspective(1000px) rotateX(10deg) translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,255,65,0.4);
+        }
+        
+        .tab-button {
+            background: rgba(51, 51, 51, 0.8);
+            color: #00ff41;
+            border: 2px solid #00ff41;
+            margin: 5px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9em;
+            transform: perspective(1000px) rotateX(0deg);
+        }
+        
+        .tab-button.active {
+            background: linear-gradient(45deg, #00ff41, #00cc33);
+            color: #000;
+            transform: perspective(1000px) rotateX(5deg) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,255,65,0.3);
+        }
+        
+        .tab-button:hover {
+            transform: perspective(1000px) rotateX(5deg) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,255,65,0.3);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .status-pass {
+            color: #00fa41;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00fa41;
+        }
+        
+        .status-fail {
+            color: #ff4141;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ff4141;
+        }
+        
+        .log-box {
+            text-align: left;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            font-size: 0.95em;
+            margin-top: 15px;
+            border: 2px solid #333;
+            border-radius: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+            box-shadow: inset 0 0 20px rgba(0,255,65,0.1);
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { max-height: 0; opacity: 0; }
+            to { max-height: 250px; opacity: 1; }
+        }
+        
+        canvas { display: none; }
+        
+        /* Particle effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: #00ff41;
+            border-radius: 50%;
+            animation: float 10s linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .login-box {
+            border: 2px solid #00ff41;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 400px;
+            border-radius: 15px;
+            background: rgba(22, 27, 34, 0.9);
+            box-shadow: 0 0 30px rgba(0,255,65,0.3), inset 0 0 30px rgba(0,255,65,0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .login-box h2 {
+            font-family: 'Orbitron', monospace;
+            color: #00ff41;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h2>🛡️ CYBER RAVANA</h2>
+    <div class="particles" id="particles"></div>
+    {% if not logged_in %}
+    <div id="login-section">
+        <div class="login-box">
+            <h2>Login to Cyber Ravana</h2>
+            <form method="POST" action="/login">
+                {{ form.hidden_tag() }}
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
         </div>
-        <button class="tab-button active" onclick="showTab(event, 'stego')">Steganography</button>
-        <button class="tab-button" onclick="showTab(event, 'crypto')">Cryptography</button>
-        <button class="tab-button" onclick="showTab(event, 'scan')">Vulnerability Scanning</button>
-        <button class="tab-button" onclick="showTab(event, 'password')">Password Tools</button>
-        <button class="tab-button" onclick="showTab(event, 'malware')">Malware Analysis</button>
-        </nav>
-
-    <main>
-        <div id="stego" class="tab-content active">
-            <div class="tool-box">
-                <h3>🕵️ Encrypted Steganography</h3>
-                <p>Hide secret messages inside images.</p>
-                <input type="file" id="stegoFile" accept="image/*">
-                <input type="password" id="stegoPass" placeholder="Secret Key (Keep it safe)">
-                <textarea id="stegoMsg" placeholder="Message to hide..."></textarea>
-                <button onclick="runStego(true)">HIDE MESSAGE</button>
-                <button onclick="runStego(false)">DECODE IMAGE</button>
-                <div id="stegoResult" class="log-box">Status: Waiting for input...</div>
-            </div>
-        </div>
-
-        <div id="crypto" class="tab-content">
-            <div class="tool-box">
-                <h3>🔐 Cryptography Engine</h3>
-                <textarea id="cryptoText" placeholder="Text to encrypt/decrypt"></textarea>
-                <input type="password" id="cryptoKey" placeholder="Encryption Key">
-                <button onclick="encryptText()">ENCRYPT</button>
-                <button onclick="decryptText()">DECRYPT</button>
-                <div id="cryptoResult" class="log-box">Output will appear here...</div>
-            </div>
-        </div>
-
-        <div id="scan" class="tab-content">
-            <div class="tool-box">
-                <h3>🔍 Security Scanners</h3>
-                <input type="text" id="urlInput" placeholder="Enter URL (e.g., https://example.com)">
-                <button onclick="scanURL()">RUN SAFETY SCAN</button>
-                <div id="urlResults" class="log-box">Results will appear after scan...</div>
-            </div>
-        </div>
-
-        <div id="password" class="tab-content">
-            <div class="tool-box">
-                <h3>🔑 Password Strength Auditor</h3>
-                <input type="password" id="passwordInput" placeholder="Enter password to test">
-                <button onclick="checkPasswordStrength()">CHECK STRENGTH</button>
-                <div id="passwordResult" class="log-box">Strength Score: --</div>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        // Simple Tab Switching Logic
-        function showTab(event, tabId) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+    </div>
+    {% else %}
+    <h1>🛡️ CYBER RAVANA: MULTI-TOOL SUITE</h1>
+    <a href="/logout" style="color: #ff4141; position: absolute; top: 20px; right: 20px;">Logout</a>
+    <div id="loading" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:1000;">
+        <div class="spinner" style="border: 4px solid #f3f3f3; border-top: 4px solid #00ff41; border-radius: 50%; width: 50px; height: 50px; animation: spin 2s linear infinite;"></div>
+    </div>
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-
-        // Keep your existing API Fetch functions here (runStego, scanURL, etc.)
-        // Ensure your Flask app.py handles these /api/ routes!
+    </style>
+    
+    <div id="tabs">
+        <button class="tab-button active" onclick="showTab('stego')">Steganography</button>
+        <button class="tab-button" onclick="showTab('crypto')">Cryptography</button>
+        <button class="tab-button" onclick="showTab('scan')">Scanning</button>
+        <button class="tab-button" onclick="showTab('pentest')">Pen Testing</button>
+        <button class="tab-button" onclick="showTab('ethical')">Ethical Hacking</button>
+        <button class="tab-button" onclick="showTab('malware')">Malware Analysis</button>
+        <button class="tab-button" onclick="showTab('forensics')">Forensics</button>
+        <button class="tab-button" onclick="showTab('osint')">OSINT</button>
+        <button class="tab-button" onclick="showTab('network')">Network Tools</button>
+        <button class="tab-button" onclick="showTab('websec')">Web Security</button>
+        <button class="tab-button" onclick="showTab('mobile')">Mobile Security</button>
+        <button class="tab-button" onclick="showTab('cloud')">Cloud Security</button>
+        <button class="tab-button" onclick="showTab('threat')">Threat Intel</button>
+        <button class="tab-button" onclick="showTab('incident')">Incident Response</button>
+        <button class="tab-button" onclick="showTab('ids')">IDS/IPS</button>
+        <button class="tab-button" onclick="showTab('firewall')">Firewall</button>
+        <button class="tab-button" onclick="showTab('reverse')">Reverse Eng</button>
+        <button class="tab-button" onclick="showTab('password')">Password Tools</button>
+        <button class="tab-button" onclick="showTab('social')">Social Eng</button>
+        <button class="tab-button" onclick="showTab('ransom')">Ransomware</button>
+        <button class="tab-button" onclick="showTab('zero')">Zero-Day</button>
+        <button class="tab-button" onclick="showTab('priv')">Privilege</button>
+        <button class="tab-button" onclick="showTab('siem')">SIEM</button>
+        <button class="tab-button" onclick="showTab('log')">Log Monitor</button>
+        <button class="tab-button" onclick="showTab('honey')">Honeypots</button>
+        <button class="tab-button" onclick="showTab('hunt')">Threat Hunting</button>
+        <button class="tab-button" onclick="showTab('passcrack')">Password Cracking</button>
+        <button class="tab-button" onclick="showTab('wifi')">WiFi Cracking</button>
+        <button class="tab-button" onclick="showTab('system')">System Check</button>
+        <button class="tab-button" onclick="showTab('iot')">IoT Security</button>
+    </div>
+    
+    <div id="stego" class="tab-content active">
+        <div class="tool-box">
+            <h3>🕵️ ENCRYPTED STEGANOGRAPHY</h3>
+            <input type="file" id="stegoFile" accept="image/*">
+            <input type="password" id="stegoPass" placeholder="Secret Key">
+            <textarea id="stegoMsg" placeholder="Message to hide..."></textarea>
+            <button onclick="runStego(true)">HIDE MESSAGE</button>
+            <button onclick="runStego(false)">DECODE IMAGE</button>
+            <p id="stegoResult"></p>
+            <img id="encodedImage" style="display:none; max-width:100%;">
+        </div>
+    </div>
+    
+    <div id="crypto" class="tab-content">
+        <div class="tool-box">
+            <h3>🔐 CRYPTOGRAPHY</h3>
+            <textarea id="cryptoText" placeholder="Text to encrypt/decrypt"></textarea>
+            <input type="password" id="cryptoKey" placeholder="Key">
+            <button onclick="encryptText()">ENCRYPT</button>
+            <button onclick="decryptText()">DECRYPT</button>
+            <p id="cryptoResult"></p>
+        </div>
+    </div>
+    
+    <div id="scan" class="tab-content">
+        <div class="tool-box">
+            <h3>🔍 VULNERABILITY SCANNING</h3>
+            <input type="text" id="scanTarget" placeholder="IP/URL to scan">
+            <button onclick="runVulnScan()">SCAN</button>
+            <div id="scanResults" class="log-box" style="display:none;"></div>
+        </div>
+        <div class="tool-box">
+            <h3>🌐 WEBSITE SAFETY SCANNER</h3>
+            <input type="text" id="urlInput" placeholder="Enter URL">
+            <button onclick="scanURL()">RUN SECURITY SCAN</button>
+            <div id="urlResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="pentest" class="tab-content">
+        <div class="tool-box">
+            <h3>🛠️ PENETRATION TESTING</h3>
+            <input type="text" id="pentestTarget" placeholder="Target IP/URL">
+            <button onclick="runPentest()">RUN BASIC TESTS</button>
+            <div id="pentestResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="ethical" class="tab-content">
+        <div class="tool-box">
+            <h3>🛡️ PASSWORD STRENGTH CHECKER</h3>
+            <input type="password" id="passwordInput" placeholder="Enter password">
+            <button onclick="checkPasswordStrength()">CHECK STRENGTH</button>
+            <p id="passwordResult"></p>
+        </div>
+    </div>
+    
+    <div id="malware" class="tab-content">
+        <div class="tool-box">
+            <h3>🦠 MALWARE ANALYSIS</h3>
+            <input type="file" id="malwareFile">
+            <button onclick="analyzeMalware()">ANALYZE FILE</button>
+            <div id="malwareResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="forensics" class="tab-content">
+        <div class="tool-box">
+            <h3>🔍 DIGITAL FORENSICS</h3>
+            <input type="file" id="forensicsFile">
+            <button onclick="analyzeForensics()">EXTRACT METADATA</button>
+            <div id="forensicsResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="osint" class="tab-content">
+        <div class="tool-box">
+            <h3>🕵️ OSINT SEARCH</h3>
+            <input type="text" id="osintQuery" placeholder="Enter query (IP, domain, etc.)">
+            <button onclick="runOSINT()">SEARCH</button>
+            <div id="osintResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="network" class="tab-content">
+        <div class="tool-box">
+            <h3>🌐 NETWORK TOOLS</h3>
+            <input type="text" id="networkTarget" placeholder="Target IP/URL">
+            <button onclick="runNetwork()">ANALYZE</button>
+            <div id="networkResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="websec" class="tab-content">
+        <div class="tool-box">
+            <h3>🕸️ WEB SECURITY</h3>
+            <input type="text" id="websecUrl" placeholder="URL to scan">
+            <button onclick="runWebsec()">SCAN</button>
+            <div id="websecResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="mobile" class="tab-content">
+        <div class="tool-box">
+            <h3>📱 MOBILE SECURITY</h3>
+            <input type="text" id="mobileApp" placeholder="App name/package">
+            <button onclick="runMobile()">ANALYZE</button>
+            <div id="mobileResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="cloud" class="tab-content">
+        <div class="tool-box">
+            <h3>☁️ CLOUD SECURITY</h3>
+            <input type="text" id="cloudService" placeholder="Cloud service">
+            <button onclick="runCloud()">AUDIT</button>
+            <div id="cloudResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="threat" class="tab-content">
+        <div class="tool-box">
+            <h3>⚠️ THREAT INTEL</h3>
+            <input type="text" id="threatQuery" placeholder="Threat query">
+            <button onclick="runThreat()">SEARCH</button>
+            <div id="threatResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="incident" class="tab-content">
+        <div class="tool-box">
+            <h3>🚨 INCIDENT RESPONSE</h3>
+            <textarea id="incidentDesc" placeholder="Incident description"></textarea>
+            <button onclick="runIncident()">LOG INCIDENT</button>
+            <div id="incidentResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="ids" class="tab-content">
+        <div class="tool-box">
+            <h3>🛡️ IDS/IPS</h3>
+            <textarea id="idsLog" placeholder="Log data"></textarea>
+            <button onclick="runIds()">ANALYZE</button>
+            <div id="idsResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="firewall" class="tab-content">
+        <div class="tool-box">
+            <h3>🔥 FIREWALL</h3>
+            <input type="text" id="firewallRule" placeholder="Firewall rule">
+            <button onclick="runFirewall()">VALIDATE</button>
+            <div id="firewallResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="reverse" class="tab-content">
+        <div class="tool-box">
+            <h3>🔄 REVERSE ENG</h3>
+            <input type="file" id="reverseFile">
+            <button onclick="runReverse()">DECOMPILE</button>
+            <div id="reverseResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="social" class="tab-content">
+        <div class="tool-box">
+            <h3>👥 SOCIAL ENG</h3>
+            <input type="text" id="socialTarget" placeholder="Target">
+            <button onclick="runSocial()">ASSESS</button>
+            <div id="socialResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="ransom" class="tab-content">
+        <div class="tool-box">
+            <h3>💰 RANSOMWARE</h3>
+            <input type="text" id="ransomFile" placeholder="Encrypted file path">
+            <button onclick="runRansom()">ANALYZE</button>
+            <div id="ransomResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="zero" class="tab-content">
+        <div class="tool-box">
+            <h3>🚀 ZERO-DAY</h3>
+            <input type="text" id="zeroVuln" placeholder="Vulnerability">
+            <button onclick="runZero()">EXPLOIT</button>
+            <div id="zeroResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="priv" class="tab-content">
+        <div class="tool-box">
+            <h3>🔑 PRIVILEGE</h3>
+            <input type="text" id="privUser" placeholder="User">
+            <button onclick="runPriv()">ESCALATE</button>
+            <div id="privResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="siem" class="tab-content">
+        <div class="tool-box">
+            <h3>📊 SIEM</h3>
+            <textarea id="siemLog" placeholder="Log data"></textarea>
+            <button onclick="runSiem()">CORRELATE</button>
+            <div id="siemResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="log" class="tab-content">
+        <div class="tool-box">
+            <h3>📝 LOG MONITOR</h3>
+            <input type="text" id="logSource" placeholder="Log source">
+            <button onclick="runLog()">MONITOR</button>
+            <div id="logResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="honey" class="tab-content">
+        <div class="tool-box">
+            <h3>🍯 HONEYPOTS</h3>
+            <input type="text" id="honeyConfig" placeholder="Config">
+            <button onclick="runHoney()">DEPLOY</button>
+            <div id="honeyResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="hunt" class="tab-content">
+        <div class="tool-box">
+            <h3>🔍 THREAT HUNTING</h3>
+            <input type="text" id="huntIndicator" placeholder="Indicator">
+            <button onclick="runHunt()">HUNT</button>
+            <div id="huntResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="passcrack" class="tab-content">
+        <div class="tool-box">
+            <h3>🔓 PASSWORD CRACKING</h3>
+            <input type="text" id="crackHash" placeholder="Hash to crack">
+            <button onclick="runPassCrack()">CRACK</button>
+            <div id="crackResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="wifi" class="tab-content">
+        <div class="tool-box">
+            <h3>📶 WIFI CRACKING</h3>
+            <input type="text" id="wifiSSID" placeholder="SSID">
+            <button onclick="runWifiCrack()">CRACK</button>
+            <div id="wifiResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="system" class="tab-content">
+        <div class="tool-box">
+            <h3>🖥️ SYSTEM CHECK</h3>
+            <button onclick="runSystemCheck()">CHECK</button>
+            <div id="systemResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+    
+    <div id="iot" class="tab-content">
+        <div class="tool-box">
+            <h3>🤖 IOT SECURITY</h3>
+            <button onclick="runIotCheck()">SCAN</button>
+            <div id="iotResults" class="log-box" style="display:none;"></div>
+        </div>
+    </div>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        async function runStego(encode) {
+            const file = document.getElementById('stegoFile').files[0];
+            const pass = document.getElementById('stegoPass').value;
+            const msg = document.getElementById('stegoMsg').value;
+            if (!file || !pass) return alert("File and Key required!");
+            if (encode && !msg) return alert("Message required for encoding!");
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('key', pass);
+            if (encode) formData.append('message', msg);
+            
+            const url = encode ? '/api/steganography/encode' : '/api/steganography/decode';
+            const response = await fetch(url, { method: 'POST', body: formData });
+            const result = await response.json();
+            
+            if (result.success) {
+                if (encode) {
+                    document.getElementById('encodedImage').src = 'data:image/png;base64,' + result.image;
+                    document.getElementById('encodedImage').style.display = 'block';
+                    document.getElementById('stegoResult').innerText = 'Image encoded successfully!';
+                } else {
+                    document.getElementById('stegoResult').innerText = 'Decoded: ' + result.message;
+                }
+            } else {
+                document.getElementById('stegoResult').innerText = 'Error: ' + result.error;
+            }
+        }
+        
+        async function scanURL() {
+            const url = document.getElementById('urlInput').value;
+            if (!url) return alert("Enter a URL!");
+            
+            const response = await fetch('/api/url_scan', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
+            });
+            const result = await response.json();
+            
+            document.getElementById('urlResults').style.display = 'block';
+            document.getElementById('urlResults').innerHTML = `
+                <p>SSL Check: <span class="${result.ssl === 'SECURE' ? 'status-pass' : 'status-fail'}">${result.ssl}</span></p>
+                <p>Keywords: <span class="${result.keywords === 'CLEAN' ? 'status-pass' : 'status-fail'}">${result.keywords}</span></p>
+                <p>Risk Score: <span class="${result.risk_score.includes('HIGH') ? 'status-fail' : 'status-pass'}">${result.risk_score}</span></p>
+            `;
+        }
+        
+        async function encryptText() {
+            const text = document.getElementById('cryptoText').value;
+            const key = document.getElementById('cryptoKey').value;
+            if (!text || !key) return alert("Text and key required!");
+            
+            const response = await fetch('/api/cryptography/encrypt', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text, key })
+            });
+            const result = await response.json();
+            document.getElementById('cryptoResult').innerText = result.result || result.error;
+        }
+        
+        async function decryptText() {
+            const text = document.getElementById('cryptoText').value;
+            const key = document.getElementById('cryptoKey').value;
+            if (!text || !key) return alert("Text and key required!");
+            
+            const response = await fetch('/api/cryptography/decrypt', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text, key })
+            });
+            const result = await response.json();
+            document.getElementById('cryptoResult').innerText = result.result || result.error;
+        }
+        
+        async function runVulnScan() {
+            const target = document.getElementById('scanTarget').value;
+            if (!target) return alert("Target required!");
+            
+            document.getElementById('scanResults').style.display = 'block';
+            document.getElementById('scanResults').innerHTML = 'Scanning...';
+            
+            const response = await fetch('/api/vulnerability/scan', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ target })
+            });
+            const result = await response.json();
+            
+            if (result.results) {
+                document.getElementById('scanResults').innerHTML = result.results.join('<br>');
+            } else {
+                document.getElementById('scanResults').innerHTML = result.error;
+            }
+        }
+        
+        async function checkPasswordStrength() {
+            const password = document.getElementById('passwordInput').value;
+            if (!password) return alert("Enter password!");
+            
+            const response = await fetch('/api/password/strength', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password })
+            });
+            const result = await response.json();
+            document.getElementById('passwordResult').innerText = result.strength || result.error;
+        }
+        
+        async function analyzeMalware() {
+            const file = document.getElementById('malwareFile').files[0];
+            if (!file) return alert("Select file!");
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            const response = await fetch('/api/malware/analyze', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            
+            document.getElementById('malwareResults').style.display = 'block';
+            document.getElementById('malwareResults').innerHTML = `
+                <p>Hash: ${result.hash}</p>
+                <p>Result: <span class="${result.result === 'MALICIOUS' ? 'status-fail' : 'status-pass'}">${result.result}</span></p>
+            `;
+        }
+        
+        async function analyzeForensics() {
+            const file = document.getElementById('forensicsFile').files[0];
+            if (!file) return alert("Select file!");
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            const response = await fetch('/api/forensics/metadata', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            
+            document.getElementById('forensicsResults').style.display = 'block';
+            document.getElementById('forensicsResults').innerHTML = `
+                <p>Filename: ${result.filename}</p>
+                <p>Size: ${result.size} bytes</p>
+                <p>Type: ${result.type}</p>
+                ${result.exif ? `<p>EXIF: ${result.exif}</p>` : ''}
+            `;
+        }
+        
+        async function runOSINT() {
+            const query = document.getElementById('osintQuery').value;
+            if (!query) return alert("Enter query!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/osint/search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query })
+                });
+                const result = await response.json();
+                document.getElementById('osintResults').style.display = 'block';
+                document.getElementById('osintResults').innerHTML = result.results || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runPentest() {
+            const target = document.getElementById('pentestTarget').value;
+            if (!target) return alert("Target required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/pentest', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ target })
+                });
+                const result = await response.json();
+                document.getElementById('pentestResults').style.display = 'block';
+                document.getElementById('pentestResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runNetwork() {
+            const target = document.getElementById('networkTarget').value;
+            if (!target) return alert("Target required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/network', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ target })
+                });
+                const result = await response.json();
+                document.getElementById('networkResults').style.display = 'block';
+                document.getElementById('networkResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runWebsec() {
+            const url = document.getElementById('websecUrl').value;
+            if (!url) return alert("URL required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/websec', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+                const result = await response.json();
+                document.getElementById('websecResults').style.display = 'block';
+                document.getElementById('websecResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runMobile() {
+            const app = document.getElementById('mobileApp').value;
+            if (!app) return alert("App required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/mobile', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ app })
+                });
+                const result = await response.json();
+                document.getElementById('mobileResults').style.display = 'block';
+                document.getElementById('mobileResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runCloud() {
+            const service = document.getElementById('cloudService').value;
+            if (!service) return alert("Service required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/cloud', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ service })
+                });
+                const result = await response.json();
+                document.getElementById('cloudResults').style.display = 'block';
+                document.getElementById('cloudResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runThreat() {
+            const query = document.getElementById('threatQuery').value;
+            if (!query) return alert("Query required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/threat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query })
+                });
+                const result = await response.json();
+                document.getElementById('threatResults').style.display = 'block';
+                document.getElementById('threatResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runIncident() {
+            const description = document.getElementById('incidentDesc').value;
+            if (!description) return alert("Description required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/incident', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ description })
+                });
+                const result = await response.json();
+                document.getElementById('incidentResults').style.display = 'block';
+                document.getElementById('incidentResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runIds() {
+            const log = document.getElementById('idsLog').value;
+            if (!log) return alert("Log required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/ids', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ log })
+                });
+                const result = await response.json();
+                document.getElementById('idsResults').style.display = 'block';
+                document.getElementById('idsResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runFirewall() {
+            const rule = document.getElementById('firewallRule').value;
+            if (!rule) return alert("Rule required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/firewall', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ rule })
+                });
+                const result = await response.json();
+                document.getElementById('firewallResults').style.display = 'block';
+                document.getElementById('firewallResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runReverse() {
+            const file = document.getElementById('reverseFile').files[0];
+            if (!file) return alert("Select file!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+                const response = await fetch('/api/reverse', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                document.getElementById('reverseResults').style.display = 'block';
+                document.getElementById('reverseResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runSocial() {
+            const target = document.getElementById('socialTarget').value;
+            if (!target) return alert("Target required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/social', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ target })
+                });
+                const result = await response.json();
+                document.getElementById('socialResults').style.display = 'block';
+                document.getElementById('socialResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runRansom() {
+            const file = document.getElementById('ransomFile').value;
+            if (!file) return alert("File required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/ransom', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ file })
+                });
+                const result = await response.json();
+                document.getElementById('ransomResults').style.display = 'block';
+                document.getElementById('ransomResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runZero() {
+            const vuln = document.getElementById('zeroVuln').value;
+            if (!vuln) return alert("Vulnerability required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/zero', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ vuln })
+                });
+                const result = await response.json();
+                document.getElementById('zeroResults').style.display = 'block';
+                document.getElementById('zeroResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runPriv() {
+            const user = document.getElementById('privUser').value;
+            if (!user) return alert("User required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/priv', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user })
+                });
+                const result = await response.json();
+                document.getElementById('privResults').style.display = 'block';
+                document.getElementById('privResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runSiem() {
+            const log = document.getElementById('siemLog').value;
+            if (!log) return alert("Log required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/siem', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ log })
+                });
+                const result = await response.json();
+                document.getElementById('siemResults').style.display = 'block';
+                document.getElementById('siemResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runLog() {
+            const source = document.getElementById('logSource').value;
+            if (!source) return alert("Source required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/log', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ source })
+                });
+                const result = await response.json();
+                document.getElementById('logResults').style.display = 'block';
+                document.getElementById('logResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runHoney() {
+            const config = document.getElementById('honeyConfig').value;
+            if (!config) return alert("Config required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/honey', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ config })
+                });
+                const result = await response.json();
+                document.getElementById('honeyResults').style.display = 'block';
+                document.getElementById('honeyResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runHunt() {
+            const indicator = document.getElementById('huntIndicator').value;
+            if (!indicator) return alert("Indicator required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/hunt', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ indicator })
+                });
+                const result = await response.json();
+                document.getElementById('huntResults').style.display = 'block';
+                document.getElementById('huntResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runPassCrack() {
+            const hash = document.getElementById('crackHash').value;
+            if (!hash) return alert("Hash required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/password/crack', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ hash })
+                });
+                const result = await response.json();
+                document.getElementById('crackResults').style.display = 'block';
+                document.getElementById('crackResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runWifiCrack() {
+            const ssid = document.getElementById('wifiSSID').value;
+            if (!ssid) return alert("SSID required!");
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/wifi/crack', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ssid })
+                });
+                const result = await response.json();
+                document.getElementById('wifiResults').style.display = 'block';
+                document.getElementById('wifiResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runSystemCheck() {
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/system/check', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({})
+                });
+                const result = await response.json();
+                document.getElementById('systemResults').style.display = 'block';
+                document.getElementById('systemResults').innerHTML = JSON.stringify(result);
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        async function runIotCheck() {
+            document.getElementById('loading').style.display = 'block';
+            try {
+                const response = await fetch('/api/iot/check', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({})
+                });
+                const result = await response.json();
+                document.getElementById('iotResults').style.display = 'block';
+                document.getElementById('iotResults').innerHTML = result.result || result.error;
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+        
+        // Particle effect
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                particle.style.width = particle.style.height = Math.random() * 4 + 2 + 'px';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        window.onload = createParticles;
     </script>
+    {% endif %}
 </body>
 </html>
