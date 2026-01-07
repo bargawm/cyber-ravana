@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Ravana | Advanced Security Suite</title>
+    <style>
+        /* Modern Hacker Aesthetic */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #0d1117; 
+            color: #c9d1d9; 
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 { 
+            color: #238636; 
+            font-size: 2.5rem; 
+            text-shadow: 0 0 15px rgba(35, 134, 54, 0.4);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #8b949e;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Grid for Tools */
+        .container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; 
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .card { 
+            background: #161b22; 
+            border: 1px solid #30363d; 
+            padding: 25px; 
+            border-radius: 12px; 
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover { 
+            border-color: #238636; 
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .card h3 {
+            color: #58a6ff;
+            margin-top: 0;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #8b949e;
+        }
+
+        /* Interaction */
+        button { 
+            background-color: #238636; 
+            color: #ffffff; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        button:hover { 
+            background-color: #2ea043; 
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            background: #30363d;
+            padding: 3px 8px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🛡️ CYBER RAVANA SUITE</h1>
+    <p class="subtitle">Cloud-Native Security Engineering Platform</p>
+
+    <div class="container">
+        <div class="card">
+            <span class="badge">Privacy</span>
+            <h3>🕵️ Steganography</h3>
+            <p>Hide secret messages within image pixels using LSB encoding.</p>
+            <button onclick="launchTool('Steganography')">Launch Tool</button>
+        </div>
+
+        <div class="card">
+            <span class="badge">Encryption</span>
+            <h3>🔐 Cryptography</h3>
+            <p>Military-grade AES-256 encryption and decryption for text data.</p>
+            <button onclick="launchTool('Cryptography')">Launch Tool</button>
+        </div>
+
+        <div class="card">
+            <span class="badge">Web Sec</span>
+            <h3>🔍 Safety Scanner</h3>
+            <p>Analyze URLs for phishing, malware, and SSL vulnerabilities.</p>
+            <button onclick="launchTool('Safety Scanner')">Launch Tool</button>
+        </div>
+
+        <div class="card">
+            <span class="badge">Intelligence</span>
+            <h3>🌐 OSINT Terminal</h3>
+            <p>Public data gathering and domain footprinting analysis.</p>
+            <button onclick="launchTool('OSINT')">Launch Tool</button>
+        </div>
+    </div>
+
+    <script>
+        function launchTool(toolName) {
+            alert(toolName + " module is initializing... Backend connection established.");
+        }
+    </script>
+
+</body>
+</html>
