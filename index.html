@@ -4,416 +4,209 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Ravana | Full Security Suite</title>
-<style>
-    /* Professional 2026 Typography */
-    @import url('fonts.googleapis.com');
+    <style>
+        :root {
+            --accent-primary: #00ff41;
+            --accent-muted: rgba(0, 255, 65, 0.1);
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
+            --border: #30363d;
+            --text-main: #e6edf3;
+            --sidebar-width: 260px;
+        }
 
-    :root {
-        --accent-primary: #00ff41;
-        --accent-muted: rgba(0, 255, 65, 0.15);
-        --bg-main: #0a0c10;
-        --bg-card: #161b22;
-        --border-color: #30363d;
-        --text-main: #e6edf3;
-        --text-muted: #8b949e;
-    }
+        body { 
+            font-family: 'Inter', system-ui, sans-serif; 
+            background-color: var(--bg-dark); 
+            color: var(--text-main); 
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-    body { 
-        font-family: 'Inter', sans-serif; 
-        background-color: var(--bg-main); 
-        color: var(--text-main); 
-        line-height: 1.6;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        /* Subtle deep gradient for depth */
-        background: radial-gradient(circle at top right, #161b22 0%, #0a0c10 100%);
-    }
+        /* --- Sidebar Navigation --- */
+        #sidebar {
+            width: var(--sidebar-width);
+            background: #010409;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            overflow-y: auto;
+        }
 
-    .tool-box { 
-        background: var(--bg-card);
-        border: 1px solid var(--border-color);
-        border-radius: 12px;
-        padding: 40px;
-        max-width: 700px;
-        width: 90%;
-        /* Professional Soft 3D Shadow */
-        box-shadow: 0 20px 40px rgba(0,0,0,0.4), 
-                    inset 0 1px 1px rgba(255,255,255,0.05);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
-                    border-color 0.3s ease;
-    }
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
 
-    .tool-box:hover {
-        border-color: #444c56;
-        transform: translateY(-4px);
-    }
+        .sidebar-header h2 {
+            font-size: 1.2rem;
+            color: var(--accent-primary);
+            margin: 0;
+        }
 
-    h1 {
-        font-weight: 600;
-        letter-spacing: -0.5px;
-        margin-bottom: 24px;
-        color: #fff;
-    }
+        .tab-button { 
+            background: transparent; 
+            color: #8b949e; 
+            border: none;
+            padding: 12px 20px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            border-left: 3px solid transparent;
+        }
 
-    /* Refined Input Fields */
-    input, textarea { 
-        font-family: 'JetBrains Mono', monospace;
-        background: #0d1117;
-        border: 1px solid var(--border-color);
-        color: var(--text-main);
-        padding: 12px 16px;
-        border-radius: 6px;
-        width: 100%;
-        box-sizing: border-box;
-        margin-bottom: 16px;
-        transition: all 0.2s ease;
-        font-size: 0.95rem;
-    }
+        .tab-button:hover { 
+            background: var(--accent-muted); 
+            color: #fff;
+        }
 
-    input:focus {
-        outline: none;
-        border-color: var(--accent-primary);
-        box-shadow: 0 0 0 3px var(--accent-muted);
-    }
+        .tab-button.active { 
+            color: var(--accent-primary);
+            background: var(--accent-muted);
+            border-left: 3px solid var(--accent-primary);
+        }
 
-    /* Professional Action Button */
-    button { 
-        background: var(--accent-primary);
-        color: #0d1117;
-        font-weight: 600;
-        padding: 12px 24px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        transition: all 0.2s ease;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
+        /* --- Main Content Area --- */
+        main {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            background: radial-gradient(circle at top right, #161b22 0%, #0d1117 100%);
+        }
 
-    button:hover { 
-        background: #2eff65;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 255, 65, 0.2);
-    }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
 
-    button:active {
-        transform: translateY(0);
-    }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    /* Tab Navigation */
-    .tab-button { 
-        background: transparent; 
-        color: var(--text-muted); 
-        border: 1px solid transparent;
-        margin-right: 8px;
-        padding: 8px 16px;
-        font-size: 0.85rem;
-    }
+        .tool-box { 
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
 
-    .tab-button.active { 
-        background: var(--accent-muted); 
-        color: var(--accent-primary); 
-        border: 1px solid var(--accent-muted);
-    }
+        h3 { margin-top: 0; color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
 
-    /* Log Output Area */
-    .log-box { 
-        background: #010409;
-        border: 1px solid var(--border-color);
-        border-radius: 6px;
-        padding: 16px;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        text-align: left;
-        margin-top: 24px;
-        max-height: 180px;
-        overflow-y: auto;
-    }
+        /* --- Inputs & Buttons --- */
+        input, textarea { 
+            width: 100%;
+            background: #010409;
+            border: 1px solid var(--border);
+            color: #fff;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+        }
 
-    .status-pass { color: var(--accent-primary); font-weight: 500; }
-    .status-fail { color: #f85149; font-weight: 500; }
+        button { 
+            background: var(--accent-primary);
+            color: #0d1117;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
 
-    /* Custom scrollbar for professional finish */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg-main); }
-    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: #484f58; }
-</style>
+        button:hover { opacity: 0.9; transform: translateY(-1px); }
 
-
+        .log-box { 
+            background: #000;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            border: 1px solid var(--border);
+            font-family: 'JetBrains Mono', monospace;
+            color: #8b949e;
+        }
+        
+        .status-pass { color: var(--accent-primary); }
+        .status-fail { color: #ff4500; }
+    </style>
 </head>
 <body>
-    <h1>🛡️ CYBER RAVANA: MULTI-TOOL SUITE</h1>
-    
-    <div id="tabs">
-        <button class="tab-button active" onclick="showTab('stego')">Steganography</button>
-        <button class="tab-button" onclick="showTab('crypto')">Cryptography</button>
-        <button class="tab-button" onclick="showTab('scan')">Scanning</button>
-        <button class="tab-button" onclick="showTab('pentest')">Pen Testing</button>
-        <button class="tab-button" onclick="showTab('ethical')">Ethical Hacking</button>
-        <button class="tab-button" onclick="showTab('malware')">Malware Analysis</button>
-        <button class="tab-button" onclick="showTab('forensics')">Forensics</button>
-        <button class="tab-button" onclick="showTab('osint')">OSINT</button>
-        <button class="tab-button" onclick="showTab('network')">Network Tools</button>
-        <button class="tab-button" onclick="showTab('websec')">Web Security</button>
-        <button class="tab-button" onclick="showTab('mobile')">Mobile Security</button>
-        <button class="tab-button" onclick="showTab('cloud')">Cloud Security</button>
-        <button class="tab-button" onclick="showTab('threat')">Threat Intel</button>
-        <button class="tab-button" onclick="showTab('incident')">Incident Response</button>
-        <button class="tab-button" onclick="showTab('ids')">IDS/IPS</button>
-        <button class="tab-button" onclick="showTab('firewall')">Firewall</button>
-        <button class="tab-button" onclick="showTab('reverse')">Reverse Eng</button>
-        <button class="tab-button" onclick="showTab('password')">Password Tools</button>
-        <button class="tab-button" onclick="showTab('social')">Social Eng</button>
-        <button class="tab-button" onclick="showTab('ransom')">Ransomware</button>
-        <button class="tab-button" onclick="showTab('zero')">Zero-Day</button>
-        <button class="tab-button" onclick="showTab('priv')">Privilege</button>
-        <button class="tab-button" onclick="showTab('siem')">SIEM</button>
-        <button class="tab-button" onclick="showTab('log')">Log Monitor</button>
-        <button class="tab-button" onclick="showTab('honey')">Honeypots</button>
-        <button class="tab-button" onclick="showTab('hunt')">Threat Hunting</button>
-    </div>
-    
-    <div id="stego" class="tab-content active">
-        <div class="tool-box">
-            <h3>🕵️ ENCRYPTED STEGANOGRAPHY</h3>
-            <input type="file" id="stegoFile" accept="image/*">
-            <input type="password" id="stegoPass" placeholder="Secret Key">
-            <textarea id="stegoMsg" placeholder="Message to hide..."></textarea>
-            <button onclick="runStego(true)">HIDE MESSAGE</button>
-            <button onclick="runStego(false)">DECODE IMAGE</button>
-            <p id="stegoResult"></p>
-            <img id="encodedImage" style="display:none; max-width:100%;">
+
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h2>🛡️ CYBER RAVANA</h2>
         </div>
-    </div>
-    
-    <div id="crypto" class="tab-content">
-        <div class="tool-box">
-            <h3>🔐 CRYPTOGRAPHY</h3>
-            <textarea id="cryptoText" placeholder="Text to encrypt/decrypt"></textarea>
-            <input type="password" id="cryptoKey" placeholder="Key">
-            <button onclick="encryptText()">ENCRYPT</button>
-            <button onclick="decryptText()">DECRYPT</button>
-            <p id="cryptoResult"></p>
+        <button class="tab-button active" onclick="showTab(event, 'stego')">Steganography</button>
+        <button class="tab-button" onclick="showTab(event, 'crypto')">Cryptography</button>
+        <button class="tab-button" onclick="showTab(event, 'scan')">Vulnerability Scanning</button>
+        <button class="tab-button" onclick="showTab(event, 'password')">Password Tools</button>
+        <button class="tab-button" onclick="showTab(event, 'malware')">Malware Analysis</button>
+        </nav>
+
+    <main>
+        <div id="stego" class="tab-content active">
+            <div class="tool-box">
+                <h3>🕵️ Encrypted Steganography</h3>
+                <p>Hide secret messages inside images.</p>
+                <input type="file" id="stegoFile" accept="image/*">
+                <input type="password" id="stegoPass" placeholder="Secret Key (Keep it safe)">
+                <textarea id="stegoMsg" placeholder="Message to hide..."></textarea>
+                <button onclick="runStego(true)">HIDE MESSAGE</button>
+                <button onclick="runStego(false)">DECODE IMAGE</button>
+                <div id="stegoResult" class="log-box">Status: Waiting for input...</div>
+            </div>
         </div>
-    </div>
-    
-    <div id="scan" class="tab-content">
-        <div class="tool-box">
-            <h3>🔍 VULNERABILITY SCANNING</h3>
-            <input type="text" id="scanTarget" placeholder="IP/URL to scan">
-            <button onclick="runVulnScan()">SCAN</button>
-            <div id="scanResults" class="log-box" style="display:none;"></div>
+
+        <div id="crypto" class="tab-content">
+            <div class="tool-box">
+                <h3>🔐 Cryptography Engine</h3>
+                <textarea id="cryptoText" placeholder="Text to encrypt/decrypt"></textarea>
+                <input type="password" id="cryptoKey" placeholder="Encryption Key">
+                <button onclick="encryptText()">ENCRYPT</button>
+                <button onclick="decryptText()">DECRYPT</button>
+                <div id="cryptoResult" class="log-box">Output will appear here...</div>
+            </div>
         </div>
-        <div class="tool-box">
-            <h3>🌐 WEBSITE SAFETY SCANNER</h3>
-            <input type="text" id="urlInput" placeholder="Enter URL">
-            <button onclick="scanURL()">RUN SECURITY SCAN</button>
-            <div id="urlResults" class="log-box" style="display:none;"></div>
+
+        <div id="scan" class="tab-content">
+            <div class="tool-box">
+                <h3>🔍 Security Scanners</h3>
+                <input type="text" id="urlInput" placeholder="Enter URL (e.g., https://example.com)">
+                <button onclick="scanURL()">RUN SAFETY SCAN</button>
+                <div id="urlResults" class="log-box">Results will appear after scan...</div>
+            </div>
         </div>
-    </div>
-    
-    <div id="pentest" class="tab-content">
-        <div class="tool-box">
-            <h3>🛠️ PENETRATION TESTING</h3>
-            <input type="text" id="pentestTarget" placeholder="Target IP/URL">
-            <button onclick="runPentest()">RUN BASIC TESTS</button>
-            <div id="pentestResults" class="log-box" style="display:none;"></div>
+
+        <div id="password" class="tab-content">
+            <div class="tool-box">
+                <h3>🔑 Password Strength Auditor</h3>
+                <input type="password" id="passwordInput" placeholder="Enter password to test">
+                <button onclick="checkPasswordStrength()">CHECK STRENGTH</button>
+                <div id="passwordResult" class="log-box">Strength Score: --</div>
+            </div>
         </div>
-    </div>
-    
-    <div id="ethical" class="tab-content">
-        <div class="tool-box">
-            <h3>🛡️ PASSWORD STRENGTH CHECKER</h3>
-            <input type="password" id="passwordInput" placeholder="Enter password">
-            <button onclick="checkPasswordStrength()">CHECK STRENGTH</button>
-            <p id="passwordResult"></p>
-        </div>
-    </div>
-    
-    <div id="malware" class="tab-content">
-        <div class="tool-box">
-            <h3>🦠 MALWARE ANALYSIS</h3>
-            <input type="file" id="malwareFile">
-            <button onclick="analyzeMalware()">ANALYZE FILE</button>
-            <div id="malwareResults" class="log-box" style="display:none;"></div>
-        </div>
-    </div>
-    
-    <div id="forensics" class="tab-content">
-        <div class="tool-box">
-            <h3>🔍 DIGITAL FORENSICS</h3>
-            <input type="file" id="forensicsFile">
-            <button onclick="analyzeForensics()">EXTRACT METADATA</button>
-            <div id="forensicsResults" class="log-box" style="display:none;"></div>
-        </div>
-    </div>
-    
+    </main>
+
     <script>
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+        // Simple Tab Switching Logic
+        function showTab(event, tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            
             document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
+            event.currentTarget.classList.add('active');
         }
-        
-        async function runStego(encode) {
-            const file = document.getElementById('stegoFile').files[0];
-            const pass = document.getElementById('stegoPass').value;
-            const msg = document.getElementById('stegoMsg').value;
-            if (!file || !pass) return alert("File and Key required!");
-            if (encode && !msg) return alert("Message required for encoding!");
-            
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('key', pass);
-            if (encode) formData.append('message', msg);
-            
-            const url = encode ? '/api/steganography/encode' : '/api/steganography/decode';
-            const response = await fetch(url, { method: 'POST', body: formData });
-            const result = await response.json();
-            
-            if (result.success) {
-                if (encode) {
-                    document.getElementById('encodedImage').src = 'data:image/png;base64,' + result.image;
-                    document.getElementById('encodedImage').style.display = 'block';
-                    document.getElementById('stegoResult').innerText = 'Image encoded successfully!';
-                } else {
-                    document.getElementById('stegoResult').innerText = 'Decoded: ' + result.message;
-                }
-            } else {
-                document.getElementById('stegoResult').innerText = 'Error: ' + result.error;
-            }
-        }
-        
-        async function scanURL() {
-            const url = document.getElementById('urlInput').value;
-            if (!url) return alert("Enter a URL!");
-            
-            const response = await fetch('/api/url_scan', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url })
-            });
-            const result = await response.json();
-            
-            document.getElementById('urlResults').style.display = 'block';
-            document.getElementById('urlResults').innerHTML = `
-                <p>SSL Check: <span class="${result.ssl === 'SECURE' ? 'status-pass' : 'status-fail'}">${result.ssl}</span></p>
-                <p>Keywords: <span class="${result.keywords === 'CLEAN' ? 'status-pass' : 'status-fail'}">${result.keywords}</span></p>
-                <p>Risk Score: <span class="${result.risk_score.includes('HIGH') ? 'status-fail' : 'status-pass'}">${result.risk_score}</span></p>
-            `;
-        }
-        
-        async function encryptText() {
-            const text = document.getElementById('cryptoText').value;
-            const key = document.getElementById('cryptoKey').value;
-            if (!text || !key) return alert("Text and key required!");
-            
-            const response = await fetch('/api/cryptography/encrypt', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text, key })
-            });
-            const result = await response.json();
-            document.getElementById('cryptoResult').innerText = result.result || result.error;
-        }
-        
-        async function decryptText() {
-            const text = document.getElementById('cryptoText').value;
-            const key = document.getElementById('cryptoKey').value;
-            if (!text || !key) return alert("Text and key required!");
-            
-            const response = await fetch('/api/cryptography/decrypt', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text, key })
-            });
-            const result = await response.json();
-            document.getElementById('cryptoResult').innerText = result.result || result.error;
-        }
-        
-        async function runVulnScan() {
-            const target = document.getElementById('scanTarget').value;
-            if (!target) return alert("Target required!");
-            
-            document.getElementById('scanResults').style.display = 'block';
-            document.getElementById('scanResults').innerHTML = 'Scanning...';
-            
-            const response = await fetch('/api/vulnerability/scan', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ target })
-            });
-            const result = await response.json();
-            
-            if (result.results) {
-                document.getElementById('scanResults').innerHTML = result.results.join('<br>');
-            } else {
-                document.getElementById('scanResults').innerHTML = result.error;
-            }
-        }
-        
-        async function checkPasswordStrength() {
-            const password = document.getElementById('passwordInput').value;
-            if (!password) return alert("Enter password!");
-            
-            const response = await fetch('/api/password/strength', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ password })
-            });
-            const result = await response.json();
-            document.getElementById('passwordResult').innerText = result.strength || result.error;
-        }
-        
-        async function analyzeMalware() {
-            const file = document.getElementById('malwareFile').files[0];
-            if (!file) return alert("Select file!");
-            
-            const formData = new FormData();
-            formData.append('file', file);
-            
-            const response = await fetch('/api/malware/analyze', {
-                method: 'POST',
-                body: formData
-            });
-            const result = await response.json();
-            
-            document.getElementById('malwareResults').style.display = 'block';
-            document.getElementById('malwareResults').innerHTML = `
-                <p>Hash: ${result.hash}</p>
-                <p>Result: <span class="${result.result === 'MALICIOUS' ? 'status-fail' : 'status-pass'}">${result.result}</span></p>
-            `;
-        }
-        
-        async function analyzeForensics() {
-            const file = document.getElementById('forensicsFile').files[0];
-            if (!file) return alert("Select file!");
-            
-            const formData = new FormData();
-            formData.append('file', file);
-            
-            const response = await fetch('/api/forensics/metadata', {
-                method: 'POST',
-                body: formData
-            });
-            const result = await response.json();
-            
-            document.getElementById('forensicsResults').style.display = 'block';
-            document.getElementById('forensicsResults').innerHTML = `
-                <p>Filename: ${result.filename}</p>
-                <p>Size: ${result.size} bytes</p>
-                <p>Type: ${result.type}</p>
-                ${result.exif ? `<p>EXIF: ${result.exif}</p>` : ''}
-            `;
-        }
+
+        // Keep your existing API Fetch functions here (runStego, scanURL, etc.)
+        // Ensure your Flask app.py handles these /api/ routes!
     </script>
 </body>
 </html>
