@@ -4,21 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Ravana | Full Security Suite</title>
-    <style>
-        body { font-family: 'Courier New', monospace; background: #000; color: #00ff41; text-align: center; padding: 20px; }
-        .tool-box { border: 1px solid #00ff41; padding: 20px; margin: 20px auto; max-width: 800px; border-radius: 8px; background: #161b22; box-shadow: 0 0 15px rgba(0,255,65,0.2); }
-        input, textarea, button { margin: 10px; padding: 10px; border-radius: 4px; border: 1px solid #00ff41; background: #0d1117; color: #00ff41; width: 85%; }
-        button { background: #00ff41; color: #000; font-weight: bold; cursor: pointer; width: auto; transition: 0.3s; }
-        button:hover { background: #00cc33; }
-        .tab-button { background: #333; color: #00ff41; border: 1px solid #00ff41; margin: 5px; }
-        .tab-button.active { background: #00ff41; color: #000; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .status-pass { color: #00fa41; font-weight: bold; }
-        .status-fail { color: #ff4141; font-weight: bold; }
-        .log-box { text-align: left; background: #222; padding: 10px; font-size: 0.9em; margin-top: 10px; border: 1px solid #333; max-height: 200px; overflow-y: auto; }
-        canvas { display: none; }
-    </style>
+   /* Import a futuristic font */
+@import url('fonts.googleapis.com');
+
+body { 
+    font-family: 'Orbitron', 'Courier Prime', monospace; 
+    background: radial-gradient(circle at center, #0a1a0f 0%, #000 100%); 
+    color: #00ff41; 
+    text-align: center; 
+    padding: 20px; 
+    margin: 0;
+    overflow-x: hidden;
+    /* 3D Perspective for the whole page */
+    perspective: 1000px;
+}
+
+/* Animated Scanning Line Effect */
+body::before {
+    content: " ";
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.tool-box { 
+    border: 1px solid rgba(0, 255, 65, 0.5); 
+    padding: 40px; 
+    margin: 50px auto; 
+    max-width: 850px; 
+    border-radius: 15px; 
+    /* Glassmorphism Effect */
+    background: rgba(22, 27, 34, 0.7); 
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 255, 65, 0.1), inset 0 0 15px rgba(0,255,65,0.05); 
+    /* 3D Tilt Effect */
+    transform: rotateX(5deg);
+    transition: transform 0.5s ease;
+}
+
+.tool-box:hover {
+    transform: rotateX(0deg) scale(1.01);
+}
+
+h1, h2 {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41;
+}
+
+input, textarea { 
+    margin: 15px; 
+    padding: 12px; 
+    border-radius: 8px; 
+    border: 1px solid #00ff41; 
+    background: rgba(13, 17, 23, 0.8); 
+    color: #00ff41; 
+    width: 85%; 
+    font-family: 'Courier Prime', monospace;
+    box-shadow: inset 0 0 5px rgba(0,255,65,0.2);
+    transition: 0.3s;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(0,255,65,0.5);
+    border-color: #fff;
+}
+
+button { 
+    background: #00ff41; 
+    color: #000; 
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900; 
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer; 
+    width: auto; 
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    border: none;
+    text-transform: uppercase;
+    box-shadow: 0 5px 0 #008f25;
+}
+
+button:hover { 
+    background: #00ff41; 
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 255, 65, 0.4), 0 8px 0 #008f25;
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #008f25;
+}
+
+.log-box { 
+    text-align: left; 
+    background: rgba(0, 0, 0, 0.8); 
+    padding: 15px; 
+    font-size: 0.85em; 
+    margin-top: 20px; 
+    border-left: 3px solid #00ff41; 
+    max-height: 200px; 
+    overflow-y: auto; 
+    border-radius: 0 8px 8px 0;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0d1117; }
+::-webkit-scrollbar-thumb { background: #00ff41; border-radius: 10px; }
+
 </head>
 <body>
     <h1>🛡️ CYBER RAVANA: MULTI-TOOL SUITE</h1>
