@@ -231,6 +231,61 @@
                 document.getElementById('scanResults').innerHTML = result.error;
             }
         }
+        
+        async function checkPasswordStrength() {
+            const password = document.getElementById('passwordInput').value;
+            if (!password) return alert("Enter password!");
+            
+            const response = await fetch('/api/password/strength', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password })
+            });
+            const result = await response.json();
+            document.getElementById('passwordResult').innerText = result.strength || result.error;
+        }
+        
+        async function analyzeMalware() {
+            const file = document.getElementById('malwareFile').files[0];
+            if (!file) return alert("Select file!");
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            const response = await fetch('/api/malware/analyze', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            
+            document.getElementById('malwareResults').style.display = 'block';
+            document.getElementById('malwareResults').innerHTML = `
+                <p>Hash: ${result.hash}</p>
+                <p>Result: <span class="${result.result === 'MALICIOUS' ? 'status-fail' : 'status-pass'}">${result.result}</span></p>
+            `;
+        }
+        
+        async function analyzeForensics() {
+            const file = document.getElementById('forensicsFile').files[0];
+            if (!file) return alert("Select file!");
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            const response = await fetch('/api/forensics/metadata', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            
+            document.getElementById('forensicsResults').style.display = 'block';
+            document.getElementById('forensicsResults').innerHTML = `
+                <p>Filename: ${result.filename}</p>
+                <p>Size: ${result.size} bytes</p>
+                <p>Type: ${result.type}</p>
+                ${result.exif ? `<p>EXIF: ${result.exif}</p>` : ''}
+            `;
+        }
     </script>
 </body>
 </html>
