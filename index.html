@@ -5,150 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Ravana | Full Security Suite</title>
 <style>
+    /* Professional 2026 Typography */
+    @import url('fonts.googleapis.com');
 
-body {
-    background-color: var(--dark-void);
-    background-image: 
-        radial-gradient(circle at 50% 50%, #0a2a12 0%, #000 80%),
-        linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
-    background-size: 100% 100%, 30px 30px, 30px 30px;
-    color: var(--neon-green);
-    font-family: 'JetBrains+Mono', monospace;
-    perspective: 1500px;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin: 0;
-}
+    :root {
+        --accent-primary: #00ff41;
+        --accent-muted: rgba(0, 255, 65, 0.15);
+        --bg-main: #0a0c10;
+        --bg-card: #161b22;
+        --border-color: #30363d;
+        --text-main: #e6edf3;
+        --text-muted: #8b949e;
+    }
 
-/* Holographic Scanline Overlay */
-body::after {
-    content: " ";
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 255, 65, 0.05) 50%);
-    background-size: 100% 4px;
-    z-index: 999;
-    pointer-events: none;
-    animation: scanline 10s linear infinite;
-}
+    body { 
+        font-family: 'Inter', sans-serif; 
+        background-color: var(--bg-main); 
+        color: var(--text-main); 
+        line-height: 1.6;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        /* Subtle deep gradient for depth */
+        background: radial-gradient(circle at top right, #161b22 0%, #0a0c10 100%);
+    }
 
-@keyframes scanline {
-    from { background-position: 0 0; }
-    to { background-position: 0 100%; }
-}
+    .tool-box { 
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 40px;
+        max-width: 700px;
+        width: 90%;
+        /* Professional Soft 3D Shadow */
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4), 
+                    inset 0 1px 1px rgba(255,255,255,0.05);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                    border-color 0.3s ease;
+    }
 
-/* 3D Floating Tool Box */
-.tool-box {
-    position: relative;
-    padding: 50px;
-    max-width: 800px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(15px) saturate(180%);
-    border: 1px solid rgba(0, 255, 65, 0.3);
-    border-radius: 20px;
-    box-shadow: var(--glow-strength), inset 0 0 20px rgba(0, 255, 65, 0.1);
-    transform-style: preserve-3d;
-    animation: float3D 6s ease-in-out infinite;
-    transition: transform var(--transition-speed);
-}
+    .tool-box:hover {
+        border-color: #444c56;
+        transform: translateY(-4px);
+    }
 
-@keyframes float3D {
-    0%, 100% { transform: translateY(0px) rotateX(5deg) rotateY(-2deg); }
-    50% { transform: translateY(-20px) rotateX(-5deg) rotateY(2deg); }
-}
+    h1 {
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        margin-bottom: 24px;
+        color: #fff;
+    }
 
-.tool-box:hover {
-    animation-play-state: paused;
-    transform: rotateX(0deg) rotateY(0deg) scale(1.02);
-    border-color: var(--neon-green);
-}
+    /* Refined Input Fields */
+    input, textarea { 
+        font-family: 'JetBrains Mono', monospace;
+        background: #0d1117;
+        border: 1px solid var(--border-color);
+        color: var(--text-main);
+        padding: 12px 16px;
+        border-radius: 6px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 16px;
+        transition: all 0.2s ease;
+        font-size: 0.95rem;
+    }
 
-/* Header Text with 3D Depth */
-h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 900;
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    letter-spacing: 8px;
-    color: #fff;
-    text-shadow: 
-        0 0 10px var(--neon-green),
-        0 0 20px var(--neon-green),
-        0 5px 0px #008f25;
-    margin-bottom: 30px;
-}
+    input:focus {
+        outline: none;
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 0 3px var(--accent-muted);
+    }
 
-/* Stunning Interactive Inputs */
-input, textarea {
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(0, 255, 65, 0.2);
-    border-left: 4px solid var(--neon-green);
-    color: #fff;
-    padding: 15px;
-    margin: 10px 0;
-    width: 90%;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
+    /* Professional Action Button */
+    button { 
+        background: var(--accent-primary);
+        color: #0d1117;
+        font-weight: 600;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-input:focus {
-    outline: none;
-    background: rgba(0, 255, 65, 0.05);
-    box-shadow: -5px 0 15px rgba(0, 255, 65, 0.3);
-    width: 95%;
-}
+    button:hover { 
+        background: #2eff65;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 255, 65, 0.2);
+    }
 
-/* Professional 3D "Press" Button */
-button {
-    font-family: 'Orbitron', sans-serif;
-    background: var(--neon-green);
-    color: #000;
-    border: none;
-    padding: 15px 40px;
-    font-weight: 900;
-    border-radius: 8px;
-    cursor: pointer;
-    text-transform: uppercase;
-    margin-top: 20px;
-    box-shadow: 0 6px 0 #008f25, 0 10px 20px rgba(0, 255, 65, 0.3);
-    transition: all 0.1s ease;
-    position: relative;
-}
+    button:active {
+        transform: translateY(0);
+    }
 
-button:hover {
-    background: #4dff81;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 0 #008f25, 0 15px 25px rgba(0, 255, 65, 0.4);
-}
+    /* Tab Navigation */
+    .tab-button { 
+        background: transparent; 
+        color: var(--text-muted); 
+        border: 1px solid transparent;
+        margin-right: 8px;
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
 
-button:active {
-    transform: translateY(4px);
-    box-shadow: 0 2px 0 #008f25;
-}
+    .tab-button.active { 
+        background: var(--accent-muted); 
+        color: var(--accent-primary); 
+        border: 1px solid var(--accent-muted);
+    }
 
-/* Dynamic Status Elements */
-.status-pass { color: #fff; text-shadow: 0 0 10px var(--neon-green); font-weight: bold; }
-.status-fail { color: #ff4141; text-shadow: 0 0 10px #ff0000; font-weight: bold; }
+    /* Log Output Area */
+    .log-box { 
+        background: #010409;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 16px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        text-align: left;
+        margin-top: 24px;
+        max-height: 180px;
+        overflow-y: auto;
+    }
 
-/* Elegant Terminal Log */
-.log-box {
-    background: rgba(0, 0, 0, 0.9);
-    border: 1px solid #1a3a20;
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 30px;
-    text-align: left;
-    font-size: 0.9rem;
-    height: 150px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: var(--neon-green) transparent;
-}
+    .status-pass { color: var(--accent-primary); font-weight: 500; }
+    .status-fail { color: #f85149; font-weight: 500; }
+
+    /* Custom scrollbar for professional finish */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-main); }
+    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #484f58; }
 </style>
+
 
 </head>
 <body>
