@@ -3,74 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber Ravana | Stego Tool</title>
+    <title>Cyber Ravana | Encrypted Stego</title>
     <style>
         body { font-family: 'Courier New', monospace; background: #0d1117; color: #00ff41; text-align: center; padding: 20px; }
-        .tool-box { border: 1px solid #00ff41; padding: 20px; margin: 20px auto; max-width: 600px; border-radius: 8px; background: #161b22; }
+        .tool-box { border: 1px solid #00ff41; padding: 20px; margin: 20px auto; max-width: 600px; border-radius: 8px; background: #161b22; box-shadow: 0 0 15px rgba(0,255,65,0.2); }
+        input, textarea, button { margin: 10px; padding: 10px; border-radius: 4px; border: 1px solid #00ff41; background: #0d1117; color: #00ff41; width: 85%; }
+        button { background: #00ff41; color: black; font-weight: bold; cursor: pointer; width: auto; transition: 0.3s; }
+        button:hover { background: #ffffff; box-shadow: 0 0 10px #00ff41; }
         canvas { display: none; }
-        input, textarea, button { margin: 10px; padding: 10px; border-radius: 4px; border: 1px solid #00ff41; background: #0d1117; color: #00ff41; width: 80%; }
-        button { background: #00ff41; color: black; font-weight: bold; cursor: pointer; width: auto; }
-        #outputImage { max-width: 100%; margin-top: 10px; border: 1px dashed #00ff41; }
+        .label { font-size: 0.8rem; color: #8b949e; text-align: left; width: 85%; margin: 0 auto; display: block; }
     </style>
 </head>
 <body>
-    <h1>🛡️ CYBER RAVANA: STEGO MODULE</h1>
+    <h1>🛡️ CYBER RAVANA: ENCRYPTED STEGO</h1>
     
     <div class="tool-box">
-        <h3>1. HIDE A MESSAGE</h3>
+        <h3>🔒 HIDE & ENCRYPT</h3>
+        <span class="label">Step 1: Upload Carrier Image</span>
         <input type="file" id="upload" accept="image/*">
-        <textarea id="message" placeholder="Enter your secret message here..."></textarea>
-        <button onclick="hideMessage()">ENCODE & DOWNLOAD</button>
+        <span class="label">Step 2: Secret Password</span>
+        <input type="password" id="passphrase" placeholder="Set a key to encrypt">
+        <span class="label">Step 3: Secret Message</span>
+        <textarea id="message" placeholder="Enter message here..."></textarea>
+        <button onclick="process(true)">ENCODE & DOWNLOAD</button>
     </div>
 
     <div class="tool-box">
-        <h3>2. READ A MESSAGE</h3>
+        <h3>🔓 DECRYPT & READ</h3>
         <input type="file" id="decodeUpload" accept="image/*">
-        <button onclick="decodeMessage()">DECODE IMAGE</button>
-        <p>Result: <span id="decodedText" style="color: yellow;">...</span></p>
+        <input type="password" id="decodePass" placeholder="Enter key to decrypt">
+        <button onclick="process(false)">DECODE IMAGE</button>
+        <p>Decrypted Message: <br><span id="decodedText" style="color: yellow; font-weight: bold;">...</span></p>
     </div>
 
     <canvas id="canvas"></canvas>
 
     <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-
-        function hideMessage() {
-            const imgInput = document.getElementById('upload');
-            const message = document.getElementById('message').value;
-            if (!imgInput.files[0] || !message) return alert("Select image and enter message!");
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    ctx.drawImage(img, 0, 0);
-                    
-                    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                    // Encode message length at start, then the message (Simplified LSB)
-                    for (let i = 0; i < message.length; i++) {
-                        imgData.data[i * 4] = message.charCodeAt(i); 
-                    }
-                    // End marker
-                    imgData.data[message.length * 4] = 0; 
-
-                    ctx.putImageData(imgData, 0, 0);
-                    const link = document.createElement('a');
-                    link.download = 'secret_image.png';
-                    link.href = canvas.toDataURL();
-                    link.click();
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(imgInput.files[0]);
+        // Simple XOR Encryption Logic for Demonstration
+        function crypt(text, key) {
+            return text.split('').map((char, i) => 
+                String.fromCharCode(char.charCodeAt(0) ^ key.charCodeAt(i % key.length))
+            ).join('');
         }
 
-        function decodeMessage() {
-            const imgInput = document.getElementById('decodeUpload');
-            if (!imgInput.files[0]) return alert("Select an image to decode!");
+        function process(isEncoding) {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const fileInput = document.getElementById(isEncoding ? 'upload' : 'decodeUpload');
+            const pass = document.getElementById(isEncoding ? 'passphrase' : 'decodePass').value;
+            
+            if (!fileInput.files[0] || !pass) return alert("Image and Password required!");
 
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -80,16 +62,31 @@
                     canvas.height = img.height;
                     ctx.drawImage(img, 0, 0);
                     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                    let message = "";
-                    for (let i = 0; i < imgData.data.length; i += 4) {
-                        if (imgData.data[i] === 0) break;
-                        message += String.fromCharCode(imgData.data[i]);
+
+                    if (isEncoding) {
+                        const rawText = document.getElementById('message').value;
+                        const secretData = crypt(rawText, pass); // Encrypt first
+                        for (let i = 0; i < secretData.length; i++) {
+                            imgData.data[i * 4] = secretData.charCodeAt(i);
+                        }
+                        imgData.data[secretData.length * 4] = 0; // Terminator
+                        ctx.putImageData(imgData, 0, 0);
+                        const link = document.createElement('a');
+                        link.download = 'encrypted_stego.png';
+                        link.href = canvas.toDataURL();
+                        link.click();
+                    } else {
+                        let extracted = "";
+                        for (let i = 0; i < imgData.data.length; i += 4) {
+                            if (imgData.data[i] === 0) break;
+                            extracted += String.fromCharCode(imgData.data[i]);
+                        }
+                        document.getElementById('decodedText').innerText = crypt(extracted, pass); // Decrypt last
                     }
-                    document.getElementById('decodedText').innerText = message;
                 };
                 img.src = e.target.result;
             };
-            reader.readAsDataURL(imgInput.files[0]);
+            reader.readAsDataURL(fileInput.files[0]);
         }
     </script>
 </body>
